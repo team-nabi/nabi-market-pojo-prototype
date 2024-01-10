@@ -1,0 +1,6 @@
+rootProject.name = 'sample'
+include 'sample-application'
+include 'sample-api'
+include 'sample-domain'
+include 'sample-infra'
+
