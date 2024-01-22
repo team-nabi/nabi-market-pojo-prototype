@@ -77,12 +77,19 @@ project(':sample-application') {
 	dependencies {
 		implementation project(':sample-domain')
 		implementation project(':sample-infra')
+		implementation project(':sample-core')
 	}
 }
 
 project(':sample-infra') {
 	dependencies {
 		implementation project(':sample-domain')
+		implementation project(':sample-core')
+	}
+}
+
+project(':sample-core') {
+	dependencies {
 	}
 }
 

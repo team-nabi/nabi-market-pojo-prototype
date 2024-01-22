@@ -1,0 +1,9 @@
+dependencies {
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '8.3'
+}
+
+
+tasks.register("prepareKotlinBuildScriptModel") {}
