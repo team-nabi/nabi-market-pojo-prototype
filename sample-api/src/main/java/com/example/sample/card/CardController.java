@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/cards")
 public class CardController {
-    private final CardService cardService;
+    private final CardFacadeService cardFacadeService;
 
     /**
      * Create
@@ -27,7 +27,7 @@ public class CardController {
      */
     @PostMapping
     public ResponseEntity<CardResponseDTO> save(@RequestBody CardCreateRequestDTO cardCreateRequestDTO) {
-        return ResponseEntity.ok(cardService.createCard(cardCreateRequestDTO));
+        return ResponseEntity.ok(cardFacadeService.createCardFacade(cardCreateRequestDTO));
     }
 
     /**
@@ -37,7 +37,7 @@ public class CardController {
      */
     @GetMapping("/{id}")
     public ResponseEntity<CardResponseDTO> get(@PathVariable Long id) {
-        return ResponseEntity.ok(cardService.getCardById(id));
+        return ResponseEntity.ok(cardFacadeService.getCardByIdFacade(id));
     }
 
     /**
@@ -51,7 +51,7 @@ public class CardController {
         @PathVariable Long id,
         @RequestBody CardUpdateRequestDTO cardUpdateRequestDTO
     ) {
-        return ResponseEntity.ok(cardService.updateCardById(id, cardUpdateRequestDTO));
+        return ResponseEntity.ok(cardFacadeService.updateCardByIdFacade(id, cardUpdateRequestDTO));
     }
 
     /**
@@ -61,7 +61,7 @@ public class CardController {
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
-        cardService.deleteCardById(id);
+        cardFacadeService.deleteCardByIdFacade(id);
 
         return ResponseEntity.ok("SUCCESS");
     }

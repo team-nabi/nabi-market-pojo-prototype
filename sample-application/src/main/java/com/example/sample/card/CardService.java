@@ -1,5 +1,6 @@
 package com.example.sample.card;
 
+import com.example.sample.atomic.Atomic;
 import com.example.sample.card.dto.CardCreateRequestDTO;
 import com.example.sample.card.dto.CardResponseDTO;
 import com.example.sample.card.dto.CardUpdateRequestDTO;
@@ -8,7 +9,6 @@ import com.example.sample.cardimage.CardImage;
 import com.example.sample.cardimage.dto.CardImageInfoResponseDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -18,7 +18,6 @@ public class CardService {
     private final CardRepository cardRepository;
     private final CardImageRepository cardImageRepository;
 
-    @Transactional
     public CardResponseDTO createCard(CardCreateRequestDTO cardCreateRequestDTO) {
         Card card = cardCreateRequestDTO.toDomain();
         Card savedCard = cardRepository.save(card);
@@ -32,7 +31,6 @@ public class CardService {
         return CardResponseDTO.of(savedCard, savedCardImages);
     }
 
-    @Transactional(readOnly = true)
     public CardResponseDTO getCardById(Long id) {
         Card card = cardRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("No Card"));
@@ -42,7 +40,6 @@ public class CardService {
         return CardResponseDTO.of(card, cardImages);
     }
 
-    @Transactional
     public CardResponseDTO updateCardById(
         Long cardId,
         CardUpdateRequestDTO cardUpdateRequestDTO
@@ -67,7 +64,6 @@ public class CardService {
         return CardResponseDTO.of(updatedCard, savedCardImages);
     }
 
-    @Transactional
     public void deleteCardById(Long cardId) {
         Card card = cardRepository.findById(cardId)
             .orElseThrow(() -> new RuntimeException("No Card"));
@@ -81,7 +77,6 @@ public class CardService {
      * @param cardImageId
      * @return
      */
-    @Transactional(readOnly = true)
     public CardImageInfoResponseDTO getCardImageById(Long cardImageId) {
         CardImage cardImage = cardImageRepository.findById(cardImageId)
             .orElseThrow(() -> new RuntimeException("No Card"));
